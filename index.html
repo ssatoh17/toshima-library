@@ -1,0 +1,11 @@
+<!doctype html><html lang="ja"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>豊島区立図書館 横断検索</title>
+<style>body{font-family:sans-serif;max-width:860px;margin:auto;padding:1em;color:#222}form{display:flex;gap:.5em}input{flex:1;padding:.6em;font-size:1em}button{padding:.6em 1em}
+.b{border-bottom:1px solid #ddd;padding:.8em 0}.t{font-weight:bold}.m{color:#666;font-size:.9em}.lib span{display:inline-block;margin:.2em .4em .2em 0;padding:.1em .5em;border-radius:4px;background:#eee;font-size:.9em}
+.ok{background:#d8f5d8!important}.ng{background:#fde2c8!important}a.r{display:inline-block;margin-top:.3em;background:#c33;color:#fff;padding:.3em .8em;border-radius:4px;text-decoration:none}small{color:#777}</style></head><body>
+<h1>豊島区立図書館 横断検索</h1>
+<p><small>キーワードまたはISBNで検索し、豊島区立の全図書館の所蔵・貸出状況を表示します。「予約する」は公式OPACの資料ページを開きます（ログイン・予約は公式サイト上でご本人が行ってください。本サイトは利用者番号やパスワードを一切扱いません）。</small></p>
+<form id="f"><input id="q" placeholder="例: 村上春樹 / 9784103534228" required><button>検索</button></form>
+<p id="s"></p><div id="out"></div>
+<p><small>書誌データ: <a href="https://ndlsearch.ndl.go.jp/">国立国会図書館サーチ</a> ／ 蔵書情報: <a href="https://calil.jp/">カーリル図書館API</a> ／ 非公式サービスです。公式: <a href="https://www.library.toshima.tokyo.jp/">豊島区立図書館</a></small></p>
+<script src="app.js"></script></body></html>
