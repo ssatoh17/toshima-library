@@ -22,7 +22,7 @@ function render(items,books){$('out').innerHTML=items.map(b=>{const r=books?.[b.
  else{const L=Object.entries(r.libkey||{});h=L.length?'<div class=lib>'+L.map(([k,v])=>`<span class="${v==='貸出可'?'ok':'ng'}">${esc(k)}: ${esc(v)}</span>`).join('')+'</div>'+(r.reserveurl?`<a class=r target=_blank rel=noopener href="${esc(r.reserveurl)}">公式サイトで予約する</a>`:''):'<span class=m>豊島区立図書館に所蔵なし</span>'}
  return `<div class=b><div class=t>${esc(b.title)}</div><div class=m>${esc(b.author)} ${esc(b.pub)} ${esc(b.year)} ISBN ${b.isbn}</div>${h}</div>`}).join('')}
 $('f').onsubmit=async e=>{e.preventDefault();if(busy)return;busy=true;const q=$('q').value.trim();$('s').textContent='検索中…';$('out').innerHTML='';
- try{const items=await ndl(q);$('s').textContent=items.length?`${items.length}件（ISBNのある図書のみ）`:'該当なし';if(!items.length)return;
+ try{const items=await ndl(q);{const n=x=>(x||'').normalize('NFKC').toLowerCase().replace(/\s+/g,''),w=n(q).length?q.normalize('NFKC').toLowerCase().split(/\s+/).filter(Boolean):[],sc=b=>{const t=n(b.title);return t.includes(n(q))?2:w.some(k=>t.includes(k))?1:0};items.forEach((b,i)=>b._i=i);items.sort((a,b)=>sc(b)-sc(a)||a._i-b._i)}$('s').textContent=items.length?`${items.length}件（ISBNのある図書のみ）`:'該当なし';if(!items.length)return;
   const ck='calil:'+items.map(i=>i.isbn).join(','),c=cache(ck);if(c){render(items,c);return}
   let books={};render(items,books);await calil(items.map(i=>i.isbn),b=>{Object.assign(books,b);render(items,books)});cache(ck,books);
  }catch(err){$('s').textContent='エラー: '+err.message}finally{busy=false}};
